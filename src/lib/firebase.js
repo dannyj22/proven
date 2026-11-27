@@ -1,9 +1,11 @@
 // Firebase + AI Logic — wired lazily and safely.
 //
 // With no VITE_FIREBASE_* values in .env, everything here is inert: the app
-// keeps running on its fixtures with no keys and no network calls. Fill in
-// your Firebase web-app config (and set VITE_FIREBASE_APPCHECK_DEBUG=1 for
-// local dev) and the coach starts routing real inference through AI Logic.
+// keeps running — deterministic checks and the Learn/Portfolio track work
+// locally, and the language agents fall back to a short offline line — with
+// no keys and no network calls. Fill in your Firebase web-app config (and set
+// VITE_FIREBASE_APPCHECK_DEBUG=1 for local dev) and the Mentor/Reader/Reviewer
+// start routing real inference through AI Logic.
 
 import { getApps, initializeApp } from "firebase/app";
 import { initializeAppCheck, CustomProvider } from "firebase/app-check";
