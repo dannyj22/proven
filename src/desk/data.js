@@ -37,7 +37,7 @@ export const ROLES = {
 export const COURSES = {
   db: [
     [
-      "Learn Relational Database Design",
+      "Relational Database Design — full course",
       "YouTube, freeCodeCamp",
       "https://youtu.be/26ls5lNiijk",
       "About 6 hours",
@@ -49,7 +49,7 @@ export const COURSES = {
       "SQL practice",
     ],
     [
-      "Queries with joins",
+      "SELECT queries with joins",
       "SQLBolt, interactive",
       "https://sqlbolt.com/lesson/select_queries_with_joins",
       "Short lesson",
@@ -198,7 +198,7 @@ export const TOPICS = {
   db: {
     name: "Database normalisation",
     skill: "Database design",
-    course: "Databases, week 5",
+    course: "Databases",
     mins: 45,
     extract: ["Splitting data into tables", "Primary and foreign keys", "Joins and summaries"],
     from: "Mrs Bello, GreenLeaf Pharmacy",
@@ -249,7 +249,7 @@ export const TOPICS = {
   js: {
     name: "JavaScript arrays",
     skill: "Programming",
-    course: "Web programming, week 7",
+    course: "Web programming",
     mins: 30,
     extract: ["Filtering lists", "Reducing a list to one value", "Writing reusable functions"],
     from: "Tunde, QuickDrop Deliveries",
@@ -293,7 +293,7 @@ export const TOPICS = {
   net: {
     name: "IP subnetting",
     skill: "Networking",
-    course: "Computer networks, week 9",
+    course: "Computer networks",
     mins: 40,
     extract: ["Subnet sizes", "Network addresses", "Avoiding overlaps"],
     from: "Ngozi, school ICT office",
