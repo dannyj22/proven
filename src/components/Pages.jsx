@@ -18,6 +18,12 @@ const safeLink = (u) => {
   }
 };
 
+const humanSize = (n) => {
+  if (n >= 1024 * 1024) return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+  if (n >= 1024) return `${Math.round(n / 1024)} KB`;
+  return `${n} B`;
+};
+
 export default function Pages({
   view,
   s,
@@ -77,6 +83,10 @@ function Studies({ s, onBegin, onViewWork, onNotes }) {
     <Page>
       <h1>This semester</h1>
       <p className="muted">Tell me what was taught and I will turn it into practice.</p>
+      <p className="muted">
+        Practice briefs are realistic but not real companies — you practise safely on
+        scenarios modelled after real work.
+      </p>
 
       <div className="grid">
         {Object.entries(TOPICS).map(([k, t]) => {
@@ -315,10 +325,12 @@ function LearnPage({
             type="file"
             id="pfile"
             accept="image/*,.pdf"
-            onChange={(e) => onFile(e.target.files[0]?.name || "")}
+            onChange={(e) => onFile(e.target.files[0] || null)}
           />{" "}
           <span className="small muted">
-            {f.file ? `Selected: ${f.file}` : "Demo records the file name only."}
+            {f.file
+              ? `Attached: ${f.file.name} · stored on this device, not uploaded.`
+              : "Stored on this device — nothing is uploaded."}
           </span>
         </p>
         <p role="alert" style={{ color: "var(--rose)" }}>
@@ -389,9 +401,17 @@ function PortfolioPage({ s, onLearn, onDownload }) {
                   </a>
                 </p>
               )}
-              {x.file && (
+              {x.file && typeof x.file === "object" && x.file.dataUrl && (
+                <img
+                  src={x.file.dataUrl}
+                  alt={x.file.name}
+                  style={{ maxWidth: "100%", borderRadius: 10, margin: "0.4rem 0" }}
+                />
+              )}
+              {x.file && typeof x.file === "object" && (
                 <p className="small muted">
-                  File named: {x.file} (not uploaded or verified)
+                  Attached: {x.file.name} ({humanSize(x.file.size)}) · stored on this
+                  device, not uploaded.
                 </p>
               )}
             </div>
@@ -424,7 +444,7 @@ function PathPage({ s, onPortfolio }) {
           <div className="card" key={r.id}>
             <h3>{r.name}</h3>
             <span className="small">
-              Proof from your work: {Math.round(r.proof * 100)}% of sample areas
+              Proof from your work: {Math.round(r.proof * 100)}% of practice areas
             </span>
             <div className="bar">
               <i style={{ width: `${r.proof * 100}%` }} />

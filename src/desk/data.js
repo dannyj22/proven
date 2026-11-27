@@ -142,7 +142,7 @@ export const blankForm = () => ({
   ans: {},
   note: "",
   link: "",
-  file: "",
+  file: null,
   result: null,
   error: "",
 });
@@ -201,7 +201,7 @@ export const TOPICS = {
     course: "Databases, week 5",
     mins: 45,
     extract: ["Splitting data into tables", "Primary and foreign keys", "Joins and summaries"],
-    from: "Mrs Bello, GreenLeaf Pharmacy (fictional)",
+    from: "Mrs Bello, GreenLeaf Pharmacy",
     title: "Our sales sheet keeps breaking",
     story:
       "Every sale is typed into one spreadsheet with the customer, medicine, price and quantity. Names are repeated and prices disagree. Design proper tables and show total sales for each medicine.",
@@ -252,7 +252,7 @@ export const TOPICS = {
     course: "Web programming, week 7",
     mins: 30,
     extract: ["Filtering lists", "Reducing a list to one value", "Writing reusable functions"],
-    from: "Tunde, QuickDrop Deliveries (fictional)",
+    from: "Tunde, QuickDrop Deliveries",
     title: "Show how much we have been paid",
     story:
       "We have a list of orders. Each has an amount and a status. Write totalPaid(orders) that returns the sum of paid orders only.",
@@ -296,7 +296,7 @@ export const TOPICS = {
     course: "Computer networks, week 9",
     mins: 40,
     extract: ["Subnet sizes", "Network addresses", "Avoiding overlaps"],
-    from: "Ngozi, school ICT office (fictional)",
+    from: "Ngozi, school ICT office",
     title: "Split the school network",
     story:
       'Divide 192.168.10.0/24 into separate subnets: Lab A needs 50 devices, Lab B needs 50 and the staff room needs 25. Write one per line, for example "Name: address/prefix".',

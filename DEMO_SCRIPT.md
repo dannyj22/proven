@@ -45,7 +45,7 @@ the tab at 1600×900 (or full window). Keep narration to ~55–65 words per 15s.
 ## Beat 3 — On-device checks + the 'why' gate (1:10–1:55)
 
 **On screen**
-1. Type (or **Load unfinished example**) SQL: three tables, primary keys,
+1. Type (or **Load a starting point**) SQL: three tables, primary keys,
    foreign keys, a `JOIN` with `SUM ... GROUP BY`.
 2. Click **Check my work** → the Reviewer flags **one** gap (a cloud message).
 3. Fix it, **Check my work** again → all five checks pass → the Reviewer asks

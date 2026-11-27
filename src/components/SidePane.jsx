@@ -112,7 +112,7 @@ export default function SidePane({
               Hint
             </button>
             <button type="button" onClick={() => onSample(k)}>
-              {sampleArmed ? "Press again" : "Load unfinished example"}
+              {sampleArmed ? "Press again" : "Load a starting point"}
             </button>
           </div>
         </>

@@ -33,7 +33,8 @@ function Ticket({ k, exam, onOpen }) {
     <div className="ticket">
       <b>{t.title}</b>
       <p className="small muted">
-        {t.from}. About {exam ? "15 minutes in exam mode" : `${t.mins} minutes`}.
+        Practice brief from {t.from}. About{" "}
+        {exam ? "15 minutes in exam mode" : `${t.mins} minutes`}.
       </p>
       <button type="button" className="go" onClick={() => onOpen(k)}>
         Open workspace
@@ -174,7 +175,7 @@ export default function ChatView({
             </span>
           </div>
           <button type="button" onClick={onLater} disabled={!!s.busy}>
-            Skip ahead 3 days
+            Check in
           </button>
         </div>
 

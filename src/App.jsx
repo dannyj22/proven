@@ -534,7 +534,7 @@ export default function App() {
 
     if (!open.length) {
       setChips([{ label: "Show my path", action: "view", value: "path" }]);
-      await say(alive, "mentor", { text: `You tried all three sample areas. ${v}.` }, why);
+      await say(alive, "mentor", { text: `You tried all three practice areas. ${v}.` }, why);
       return;
     }
 
@@ -626,6 +626,38 @@ export default function App() {
       ...p,
       forms: { ...p.forms, [id]: { ...f, [field]: value } },
     }));
+  }
+
+  // Store a proof attachment locally (name, size, and a preview for small
+  // images). Nothing is uploaded — it lives in the student's portfolio on this
+  // device, exactly like the rest of their memory.
+  function attachFile(fileObj) {
+    const cur = sRef.current;
+    const id = cur.course;
+    if (!id) return;
+
+    const setFile = (file) =>
+      update((p) => ({
+        ...p,
+        forms: { ...p.forms, [id]: { ...(p.forms[id] || blankForm()), file } },
+      }));
+
+    if (!fileObj) {
+      setFile(null);
+      return;
+    }
+
+    const meta = { name: fileObj.name, size: fileObj.size, type: fileObj.type, dataUrl: null };
+    const smallImage = fileObj.type.startsWith("image/") && fileObj.size <= 1024 * 1024 * 1.5;
+
+    if (smallImage) {
+      const reader = new FileReader();
+      reader.onload = () => setFile({ ...meta, dataUrl: reader.result });
+      reader.onerror = () => setFile(meta);
+      reader.readAsDataURL(fileObj);
+    } else {
+      setFile(meta);
+    }
   }
 
   function answer(value) {
@@ -738,7 +770,8 @@ export default function App() {
         "",
         `${x.name} (${x.by})`,
         x.note,
-        x.link ? `Proof link, not verified: ${x.link}` : ""
+        x.link ? `Proof link, not verified: ${x.link}` : "",
+        x.file ? `Attached: ${x.file.name} (stored on device, not uploaded)` : ""
       );
     });
 
@@ -752,7 +785,6 @@ export default function App() {
 
   function later() {
     if (sRef.current.busy) return;
-    pushMsg({ memo: "Three days have passed" });
     enqueue(async (alive) => {
       const cur = sRef.current;
       const done = Object.keys(TOPICS).filter((k) => cur.work[k] && cur.work[k].done);
@@ -766,12 +798,13 @@ export default function App() {
           alive,
           "mentor",
           {
-            text: `Quick check-in. Without looking at your old work: ${TOPICS[weak].why.replace(
-              "did you",
-              "would you"
-            )}\n\nTry saying it to yourself, then compare.`,
+            text: `You have completed ${done.length} ${
+              done.length === 1 ? "ticket" : "tickets"
+            }. The ${TOPICS[weak].name.toLowerCase()} one needed the most checks and hints, so it is worth a review. Without looking back: ${TOPICS[
+              weak
+            ].why.replace("did you", "would you")}`,
           },
-          "This was the completed ticket where you needed the most checks and hints."
+          "This is the completed ticket where you needed the most checks and hints."
         );
         setChips([
           { label: "Show my path", action: "view", value: "path" },
@@ -779,7 +812,7 @@ export default function App() {
         ]);
       } else {
         await say(alive, "mentor", {
-          text: "Checking in. No ticket is completed yet. Want to start with a small one?",
+          text: "Here is where you are: no ticket is completed yet. Start with a small one?",
         });
         setChips(topicChips());
       }
@@ -945,7 +978,7 @@ export default function App() {
       case "pause":
         enqueue((alive) =>
           say(alive, "mentor", {
-            text: "Good work. In a full version I would check in when you have study time.",
+            text: "I will stop suggesting tasks for now. Your desk is saved on this device, so pick up any topic whenever you are back.",
           })
         );
         break;
@@ -1049,7 +1082,7 @@ export default function App() {
     answer,
     note: (v) => editForm("note", v),
     link: (v) => editForm("link", v.trim()),
-    file: (v) => editForm("file", v),
+    file: attachFile,
     submit: submitProof,
     download: downloadPortfolio,
     sampleArmedFor,
