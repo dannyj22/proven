@@ -1,1 +1,5 @@
+.env
+data/
+uploads/
 .DS_Store
+node_modules/
