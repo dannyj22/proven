@@ -1,5 +1,5 @@
 // Local persistence — the desk's memory lives on this device, not on a server.
-const KEY = "practicum.desk.v1";
+const KEY = "proven.desk.v1";
 
 export function load() {
   try {
@@ -24,7 +24,8 @@ export function save(state) {
 export function clear() {
   try {
     localStorage.removeItem(KEY);
-    // remove the old workspace key so a stale build can't resurrect it
+    // remove the older keys so a stale build can't resurrect them
+    localStorage.removeItem("practicum.desk.v1");
     localStorage.removeItem("practicum.v1");
   } catch {
     // nothing to clear

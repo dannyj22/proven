@@ -14,14 +14,14 @@ free on the free tier.
 
 1. Go to <https://console.firebase.google.com> and sign in.
 2. Click **Add project**.
-3. Name it (e.g. `practicum`).
+3. Name it (e.g. `proven`).
 4. **Google Analytics**: leave it **off** — you don't need it.
 5. Click **Create project**, wait a few seconds, then **Continue**.
 
 ## 2. Register a Web app and grab the config
 
 1. On the project overview, click the **Web** icon (`</>`).
-2. Give it a nickname (e.g. `practicum`). You can skip "set up Firebase
+2. Give it a nickname (e.g. `proven`). You can skip "set up Firebase
    Hosting" for now.
 3. Click **Register app**.
 4. Copy the `firebaseConfig` object it shows (the `apiKey`, `projectId`,

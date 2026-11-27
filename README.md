@@ -1,8 +1,8 @@
-# Practicum
+# Proven
 
-**Your course is the theory. This is where you practise it.**
+**Your course is the theory. This is the proof.**
 
-Practicum is an agent team that turns what a computer-science student is
+Proven is an agent team that turns what a computer-science student is
 studying into realistic, checked practice — and keeps proof of what they can
 actually do. Built for
 [#BuildHybridAI](https://devpost.com) 2026 (on-device + cloud).
