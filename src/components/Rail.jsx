@@ -30,12 +30,17 @@ const SECTIONS = [
   ["memory", "Memory"],
 ];
 
-export default function Rail({ view, onView, theme, onTheme, armed, onReset }) {
+export default function Rail({ view, onView, theme, onTheme, armed, onReset, onHome }) {
   return (
     <nav className="rail" aria-label="Main">
-      <div className="logo" aria-hidden="true">
+      <button
+        type="button"
+        className="logo"
+        onClick={onHome}
+        aria-label="Back to the landing page"
+      >
         P
-      </div>
+      </button>
       {SECTIONS.map(([k, label]) => (
         <button
           key={k}

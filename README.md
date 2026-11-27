@@ -7,8 +7,8 @@ studying into realistic, checked practice — and keeps proof of what they can
 actually do. Built for
 [#BuildHybridAI](https://devpost.com) 2026 (on-device + cloud).
 
-It opens with a short, three-step onboarding, then hands you a desk staffed by
-five agents:
+It opens with a landing page, then a short three-step onboarding, then hands
+you a desk staffed by five agents:
 
 | Agent | What it does |
 |---|---|
@@ -21,7 +21,7 @@ five agents:
 ## What you can do
 
 1. **Onboard** (name → experience → goal → hours → a three-question starting
-   check), or press *Skip with a sample student* to meet Ada.
+   check), or press *Skip introduction* to start with a blank slate.
 2. **Practise** — pick a topic. The Reader explains the lesson, the Client drops
    a realistic problem, and you solve it in the workspace.
 3. **Get checked on-device** — SQL normalisation, JavaScript arrays and IP
@@ -49,7 +49,7 @@ Open the printed URL (usually `http://localhost:5173`).
 
 Deep links:
 
-- `/?demo=1` — load Ada's desk (a sample student)
+- `/?demo=1` — open straight into the desk (skips the landing page and intro)
 - `/?fresh=1` — start from a clean slate (clears saved state)
 
 Without any Firebase keys the app still works: the deterministic checks and the

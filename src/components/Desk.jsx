@@ -15,6 +15,7 @@ export default function Desk({ s, api, armed }) {
         onTheme={api.theme}
         armed={armed}
         onReset={api.reset}
+        onHome={api.home}
       />
 
       {s.view === "chat" ? (
@@ -26,6 +27,7 @@ export default function Desk({ s, api, armed }) {
           onLater={api.later}
           onPane={api.pane}
           onProve={api.prove}
+          onHome={api.home}
           side={
             <SidePane
               s={s}

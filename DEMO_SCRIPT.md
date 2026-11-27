@@ -4,20 +4,22 @@
 visible — deterministic checks on-device, agent language in the cloud (and on
 Nano where available).
 
-**Run it:** `npm run dev`, open `http://localhost:5173/?fresh=1&demo=1`, record
-the tab at 1600×900 (or full window). Keep narration to ~55–65 words per 15s.
+**Run it:** `npm run dev`. Open `http://localhost:5173/?fresh=1` to start on the
+landing page (or `?fresh=1&demo=1` to jump straight into the desk). Record the
+tab at 1600×900 (or full window). Keep narration to ~55–65 words per 15s.
 
 ---
 
-## Beat 1 — Cold open + onboarding (0:00–0:35)
+## Beat 1 — Cold open: landing page → the desk (0:00–0:35)
 
 **Narration**
 > "This is Proven. You study the theory in class — Proven turns it into
 > something you can actually do, with proof at the end."
 
 **On screen**
-1. Land on the onboarding card.
-2. Click **Skip with a sample student** (Ada appears).
+1. Land on the hero: *"Turn this week's lecture into real work."* Let the
+   **example session** play for a moment, then click **Try the demo**.
+2. On the intro, click **Skip introduction**.
 3. Point at the five agents on the left (Mentor, Curriculum reader, Client,
    Reviewer, Scout) as the Mentor's welcome streams in — note the **CLOUD**
    badge on the message.

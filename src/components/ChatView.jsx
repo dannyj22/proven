@@ -122,6 +122,7 @@ export default function ChatView({
   onLater,
   onPane,
   onProve,
+  onHome,
   side,
 }) {
   const logRef = useRef(null);
@@ -174,6 +175,9 @@ export default function ChatView({
               Agents think in the cloud · checks stay on this device.
             </span>
           </div>
+          <button type="button" className="lp-home" onClick={onHome}>
+            Home
+          </button>
           <button type="button" onClick={onLater} disabled={!!s.busy}>
             Check in
           </button>

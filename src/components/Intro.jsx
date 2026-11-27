@@ -8,13 +8,18 @@ const Choice = ({ on, children, ...rest }) => (
   </button>
 );
 
-export default function Intro({ s, onSet, onNext, onBack, onFinish, onDemo }) {
+export default function Intro({ s, onSet, onNext, onBack, onFinish, onSkip, onHome }) {
   const goals = [["none", "Not sure yet"], ...Object.entries(ROLES).map(([k, r]) => [k, r[0]])];
   const quizDone = Object.keys(s.quiz).length === QUIZ.length;
 
   return (
     <div id="intro">
       <div className="onboard">
+        <p>
+          <button type="button" onClick={onHome}>
+            ← Back to home
+          </button>
+        </p>
         <div className="steps" aria-label={`Step ${s.step} of 3`}>
           {[1, 2, 3].map((n) => (
             <i key={n} className={n <= s.step ? "on" : ""} />
@@ -36,7 +41,7 @@ export default function Intro({ s, onSet, onNext, onBack, onFinish, onDemo }) {
                 id="name"
                 maxLength={30}
                 value={s.name}
-                placeholder="e.g. Ada"
+                placeholder="Your first name"
                 onChange={(e) => onSet({ name: e.target.value })}
               />
             </p>
@@ -136,8 +141,8 @@ export default function Intro({ s, onSet, onNext, onBack, onFinish, onDemo }) {
               Meet my agent
             </button>
           )}
-          <button type="button" onClick={onDemo}>
-            Skip with a sample student
+          <button type="button" onClick={onSkip}>
+            Skip introduction
           </button>
         </div>
       </div>

@@ -364,7 +364,9 @@ export const QUIZ = [
 
 export const freshDesk = () => ({
   v: 1,
+  screen: "landing",
   ready: false,
+  skipped: false,
   step: 1,
   name: "",
   level: "Some knowledge",

@@ -8,6 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Intro from "./components/Intro.jsx";
+import Landing from "./components/Landing.jsx";
 import Desk from "./components/Desk.jsx";
 import {
   AG,
@@ -51,6 +52,8 @@ function loadInitial() {
   return {
     ...freshDesk(),
     ...loaded,
+    screen: loaded.screen || (loaded.ready ? "app" : "landing"),
+    skipped: !!loaded.skipped,
     course: loaded.course ?? null,
     forms: loaded.forms || {},
     learned: loaded.learned || {},
@@ -106,11 +109,11 @@ export default function App() {
     document.documentElement.dataset.theme = s.theme;
   }, [s.theme]);
 
-  // Deep link for filming: ?demo=1 opens Ada's desk.
+  // Deep link for filming: ?demo=1 opens straight into the desk.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
     if (p.get("demo") !== "1" || sRef.current.ready) return;
-    update({ name: "Ada", goal: "backend", known: { db: true, js: true, net: false } });
+    update({ skipped: true });
     enter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -237,13 +240,15 @@ export default function App() {
       entries.push({ id: ++memIdRef.current, kind, group, k, text, source: "Your introduction" });
 
     if (cur.name.trim()) add("name", "name", "name", `Your name is ${cur.name.trim()}`);
-    add("level", "level", "level", `Experience: ${cur.level.toLowerCase()}`);
-    add(
-      "time",
-      "time",
-      "time",
-      `${cur.hours} practice ${cur.hours === 1 ? "hour" : "hours"} a week`
-    );
+    if (!cur.skipped) {
+      add("level", "level", "level", `Experience: ${cur.level.toLowerCase()}`);
+      add(
+        "time",
+        "time",
+        "time",
+        `${cur.hours} practice ${cur.hours === 1 ? "hour" : "hours"} a week`
+      );
+    }
     if (cur.exam) add("exam", "exam", "exam", "Exams are on, so keep tasks light");
     if (cur.goal !== "none")
       add("goal", "goal", "goal", `Your stated goal: ${ROLES[cur.goal][0].toLowerCase()}`);
@@ -260,6 +265,7 @@ export default function App() {
     update((p) => ({
       ...p,
       ready: true,
+      screen: "app",
       view: "chat",
       pane: "chat",
       msgs: [],
@@ -1058,6 +1064,8 @@ export default function App() {
     pane: (p) => update({ pane: p }),
     theme: () => update((p) => ({ ...p, theme: p.theme === "dark" ? "light" : "dark" })),
     reset,
+    home: () => update({ screen: "landing" }),
+    launch: () => update({ screen: sRef.current.ready ? "app" : "intro" }),
     open: (k) => update({ cur: k, view: "chat", pane: "side" }),
     close: () => update({ cur: null, pane: "chat" }),
     send,
@@ -1088,13 +1096,18 @@ export default function App() {
     sampleArmedFor,
   };
 
-  if (!s.ready) {
+  if (s.screen === "landing") {
+    return <Landing s={s} onLaunch={api.launch} onTheme={api.theme} />;
+  }
+
+  if (s.screen === "intro") {
     return (
       <Intro
         s={s}
         onSet={(patch) => update(patch)}
         onNext={() => update((p) => ({ ...p, step: Math.min(3, p.step + 1) }))}
         onBack={() => update((p) => ({ ...p, step: Math.max(1, p.step - 1) }))}
+        onHome={api.home}
         onFinish={() => {
           const cur = sRef.current;
           const known = Object.fromEntries(
@@ -1103,8 +1116,8 @@ export default function App() {
           update({ known });
           enter();
         }}
-        onDemo={() => {
-          update({ name: "Ada", goal: "backend", known: { db: true, js: true, net: false } });
+        onSkip={() => {
+          update({ skipped: true });
           enter();
         }}
       />
